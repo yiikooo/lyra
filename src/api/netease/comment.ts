@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface CommentUser {
   locationInfo: null;

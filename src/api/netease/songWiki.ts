@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface SongWikiSummaryResponseData {
   cursor: string;
@@ -210,7 +209,9 @@ export interface SongWikiSummaryResponse {
  */
 export async function getSongWikiSummary(id: string): Promise<SongWikiSummaryResponse> {
   try {
-    const response = await fetch(`${apiBase}/song/wiki/summary?id=${id}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/song/wiki/summary?id=${id}&${realIpParam}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

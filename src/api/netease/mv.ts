@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface MvDetailResponse {
   code: number;
@@ -75,7 +74,9 @@ export interface MvUrlResponse {
  */
 export async function getMvDetail(mvid: string): Promise<MvDetailResponse> {
   try {
-    const response = await fetch(`${apiBase}/mv/detail?mvid=${mvid}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/mv/detail?mvid=${mvid}&${realIpParam}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -96,7 +97,9 @@ export async function getMvDetail(mvid: string): Promise<MvDetailResponse> {
  */
 export async function getMvDetailInfo(mvid: string): Promise<MvDetailInfoResponse> {
   try {
-    const response = await fetch(`${apiBase}/mv/detail/info?mvid=${mvid}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/mv/detail/info?mvid=${mvid}&${realIpParam}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -118,7 +121,9 @@ export async function getMvDetailInfo(mvid: string): Promise<MvDetailInfoRespons
  */
 export async function getMvUrl(id: string, r: number = 1080): Promise<MvUrlResponse> {
   try {
-    const response = await fetch(`${apiBase}/mv/url?id=${id}&r=${r}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/mv/url?id=${id}&r=${r}&${realIpParam}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

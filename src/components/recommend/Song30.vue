@@ -53,10 +53,10 @@
               </svg>
             </button>
           </i>
-          <a-button v-if="false"  @click="next" class="t-button control-button" type="text">
+          <a-button v-if="false" @click="next" class="t-button control-button" type="text">
             <font-awesome-icon size="lg" :icon="['fas', 'forward-step']" />
           </a-button>
-          <a-button v-if="false"  @click="dislike" class="t-button control-button" type="text">
+          <a-button v-if="false" @click="dislike" class="t-button control-button" type="text">
             <font-awesome-icon size="lg" :icon="['fas', 'thumbs-down']" />
           </a-button>
           <a-button @click="jumpList" class="t-button control-button" type="text">
@@ -122,7 +122,7 @@
           <a-button v-if="false" @click="next" class="t-button control-button" type="text">
             <font-awesome-icon size="lg" :icon="['fas', 'forward-step']" />
           </a-button>
-          <a-button  v-if="false"  @click="dislike" class="t-button control-button" type="text">
+          <a-button v-if="false" @click="dislike" class="t-button control-button" type="text">
             <font-awesome-icon size="lg" :icon="['fas', 'thumbs-down']" />
           </a-button>
           <a-button @click="jumpList" class="t-button control-button" type="text">
@@ -158,7 +158,6 @@ const next = () => {
   )
     uiProperties.value.personalized.song30.selectedindex = 0;
 };
-
 
 const jumpList = () => {
   router.push('/song30');

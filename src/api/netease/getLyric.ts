@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface LyricResponse {
   lrc: {
@@ -26,7 +25,7 @@ export interface LyricResponse {
  */
 async function getLyric(id: number): Promise<LyricResponse> {
   try {
-    const response = await fetch(`${apiBase}/lyric/new?id=${id}&${realIpParam}`);
+    const response = await fetch(`${apiSettings.neteaseApiBase}/lyric/new?id=${id}&${realIpParam}`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

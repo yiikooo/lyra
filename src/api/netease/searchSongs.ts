@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
+
 const realIpParam = realIP ? `realIP=${realIP}` : '';
 
 export interface SongEntry {

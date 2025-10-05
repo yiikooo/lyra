@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+
+
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface AlbumArtist {
   img1v1Id: number;
@@ -216,7 +217,7 @@ export interface GetAlbumDetailResponse {
  */
 export async function getAlbumDetail(id: string): Promise<GetAlbumDetailResponse> {
   try {
-    const response = await fetch(`${apiBase}/album?id=${id}&${realIpParam}`);
+    const response = await fetch(`${apiSettings.neteaseApiBase}/album?id=${id}&${realIpParam}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

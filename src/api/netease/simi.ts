@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface SimiSongArtist {
   img1v1Id: number;
@@ -206,7 +205,7 @@ export interface SimiSongResponse {
  */
 export async function getSimiSongs(id: string): Promise<SimiSongResponse> {
   try {
-    const response = await fetch(`${apiBase}/simi/song?id=${id}&${realIpParam}`);
+    const response = await fetch(`${apiSettings.neteaseApiBase}/simi/song?id=${id}&${realIpParam}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

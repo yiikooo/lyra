@@ -84,11 +84,10 @@ interface SuggestResponse {
   };
 }
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 async function getHotKeyword(): Promise<SearchTipGroup[]> {
-  const response = await fetch(`${apiBase}/search/hot/detail?${realIpParam}`);
+  const response = await fetch(`${apiSettings.neteaseApiBase}/search/hot/detail?${realIpParam}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -107,7 +106,7 @@ async function getHotKeyword(): Promise<SearchTipGroup[]> {
 }
 
 async function getDefaultKey(): Promise<DefaultSearchTip> {
-  const response = await fetch(`${apiBase}/search/default?${realIpParam}`);
+  const response = await fetch(`${apiSettings.neteaseApiBase}/search/default?${realIpParam}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -123,8 +122,13 @@ async function getSuggestKeyword(
   signal?: AbortSignal
 ): Promise<SearchTipGroup[]> {
   const [suggestResponse, mobileSuggestResponse] = await Promise.all([
-    fetch(`${apiBase}/search/suggest?keywords=${keywords}&${realIpParam}`, { signal }),
-    fetch(`${apiBase}/search/suggest?keywords=${keywords}&type=mobile&${realIpParam}`, { signal }),
+    fetch(`${apiSettings.neteaseApiBase}/search/suggest?keywords=${keywords}&${realIpParam}`, {
+      signal,
+    }),
+    fetch(
+      `${apiSettings.neteaseApiBase}/search/suggest?keywords=${keywords}&type=mobile&${realIpParam}`,
+      { signal }
+    ),
   ]);
 
   if (!suggestResponse.ok) {

@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 interface PlaylistDetailResponse {
   code: number;
@@ -52,7 +51,9 @@ interface PlaylistTrackAllResponse {
 
 export async function playlistDetail(id: number, s = 8): Promise<PlaylistDetailResponse> {
   try {
-    const response = await fetch(`${apiBase}/playlist/detail?id=${id}&s=${s}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/playlist/detail?id=${id}&s=${s}&${realIpParam}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

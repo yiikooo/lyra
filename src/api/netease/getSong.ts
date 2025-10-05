@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface SongUrlData {
   id: number;
@@ -148,7 +147,9 @@ export interface GetSongResponse {
  */
 async function getSongUrl(id: number, br: number = 999000): Promise<GetSongResponse> {
   try {
-    const response = await fetch(`${apiBase}/song/url?id=${id}&br=${br}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/song/url?id=${id}&br=${br}&${realIpParam}`
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -178,7 +179,9 @@ async function getSongUrl(id: number, br: number = 999000): Promise<GetSongRespo
 async function getSongUrls(ids: string[], br: number = 999000): Promise<GetSongResponse> {
   try {
     const idsParam = ids.join(',');
-    const response = await fetch(`${apiBase}/song/url?id=${idsParam}&br=${br}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/song/url?id=${idsParam}&br=${br}&${realIpParam}`
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -202,7 +205,9 @@ async function getSongUrls(ids: string[], br: number = 999000): Promise<GetSongR
 async function getSongPics(ids: string[]): Promise<string[]> {
   try {
     const idsParam = ids.join(',');
-    const response = await fetch(`${apiBase}/song/detail?ids=${idsParam}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/song/detail?ids=${idsParam}&${realIpParam}`
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -237,7 +242,9 @@ export const functions = {
  */
 export async function getSongDetail(ids: string): Promise<SongDetailResponse> {
   try {
-    const response = await fetch(`${apiBase}/song/detail?ids=${ids}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/song/detail?ids=${ids}&${realIpParam}`
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

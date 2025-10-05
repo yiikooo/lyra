@@ -1,8 +1,7 @@
 import type { ArtistEntry } from '@/types/player';
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 interface SongEntry {
   id: number;
@@ -32,7 +31,7 @@ export interface PersonalizedEntry {
 }
 
 export async function getPersonalizedSongs(): Promise<SongEntry[]> {
-  const response = await fetch(`${apiBase}/recommend/songs?${realIpParam}`);
+  const response = await fetch(`${apiSettings.neteaseApiBase}/recommend/songs?${realIpParam}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

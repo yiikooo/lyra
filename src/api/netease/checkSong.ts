@@ -1,7 +1,6 @@
 import { apiSettings } from '../config';
 
-const { neteaseApiBase: apiBase, realIP } = apiSettings;
-const realIpParam = realIP ? `realIP=${realIP}` : '';
+const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
 export interface CheckSongResponse {
   success: boolean;
@@ -15,7 +14,9 @@ export interface CheckSongResponse {
  */
 async function checkSong(id: string): Promise<CheckSongResponse> {
   try {
-    const response = await fetch(`${apiBase}/check/music?id=${id}&${realIpParam}`);
+    const response = await fetch(
+      `${apiSettings.neteaseApiBase}/check/music?id=${id}&${realIpParam}`
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

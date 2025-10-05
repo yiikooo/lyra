@@ -1,14 +1,12 @@
 import axios, { type AxiosResponse } from 'axios';
 import { apiSettings } from '../config';
 
-const neteaseApiBase = apiSettings.neteaseApiBase;
-
 /**
  * 获取歌手详情
  * @param id 歌手 id
  */
 export const getArtistDetail = (id: number) => {
-  return axios.get(`${neteaseApiBase}/artist/detail`, {
+  return axios.get(`${apiSettings.neteaseApiBase}/artist/detail`, {
     params: { id },
   });
 };
@@ -18,7 +16,7 @@ export const getArtistDetail = (id: number) => {
  * @param id 歌手 id
  */
 export const getArtistMv = (id: number, limit = 30, offset = 0) => {
-  return axios.get(`${neteaseApiBase}/artist/mv`, {
+  return axios.get(`${apiSettings.neteaseApiBase}/artist/mv`, {
     params: { id, limit, offset },
   });
 };
@@ -30,7 +28,7 @@ export const getArtistMv = (id: number, limit = 30, offset = 0) => {
  * @param offset 偏移数量 , 用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认 为 0
  */
 export const getArtistAlbum = (id: number, limit = 30, offset = 0) => {
-  return axios.get(`${neteaseApiBase}/artist/album`, {
+  return axios.get(`${apiSettings.neteaseApiBase}/artist/album`, {
     params: { id, limit, offset },
   });
 };
@@ -40,7 +38,7 @@ export const getArtistAlbum = (id: number, limit = 30, offset = 0) => {
  * @param id 歌手 id
  */
 export function getArtistTopSongs(id: string): Promise<AxiosResponse> {
-  return axios.get(`${neteaseApiBase}/artist/top/song`, {
+  return axios.get(`${apiSettings.neteaseApiBase}/artist/top/song`, {
     params: { id },
   });
 }
@@ -58,7 +56,7 @@ export function getArtistAllSongs(
   limit = 50,
   offset = 0
 ): Promise<AxiosResponse> {
-  return axios.get(`${neteaseApiBase}/artist/songs`, {
+  return axios.get(`${apiSettings.neteaseApiBase}/artist/songs`, {
     params: { id, order, limit, offset },
   });
 }
