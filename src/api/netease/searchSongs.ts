@@ -3,8 +3,6 @@ import { apiSettings } from '../config';
 
 const realIpParam = apiSettings.realIP ? `realIP=${apiSettings.realIP}` : '';
 
-const realIpParam = realIP ? `realIP=${realIP}` : '';
-
 export interface SongEntry {
   id: number;
   name: string;
@@ -30,7 +28,7 @@ export interface SearchResult {
 
 async function searchSongs(key: string, page: number = 1): Promise<SearchResult> {
   const response = await fetch(
-    `${apiBase}/cloudsearch?keywords=${encodeURIComponent(key)}&type=1&limit=15&offset=${(page - 1) * 15}&${realIpParam}`
+    `${apiSettings.neteaseApiBase}/cloudsearch?keywords=${encodeURIComponent(key)}&type=1&limit=15&offset=${(page - 1) * 15}&${realIpParam}`
   );
   if (!response.ok) {
     throw new Error('Network response was not ok');
